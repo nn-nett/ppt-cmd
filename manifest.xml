@@ -89,4 +89,5 @@
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
+  <ExtendedOverrides Url="https://nn-nett.github.io/ppt-cmd/shortcuts.json"/>
 </OfficeApp>

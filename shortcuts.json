@@ -1,0 +1,17 @@
+{
+  "actions": [
+    {
+      "id": "ToggleCommandMode",
+      "type": "ExecuteFunction",
+      "name": "Ativa/desativa o Modo Comando"
+    }
+  ],
+  "shortcuts": [
+    {
+      "action": "ToggleCommandMode",
+      "key": {
+        "default": "Ctrl+Shift+Alt+C"
+      }
+    }
+  ]
+}
