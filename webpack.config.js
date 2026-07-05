@@ -73,6 +73,17 @@ module.exports = async (env, options) => {
               }
             },
           },
+          {
+            from: "src/shortcuts/shortcuts.json",
+            to: "shortcuts.json",
+            transform(content) {
+              if (dev) {
+                return content;
+              } else {
+                return content.toString().replace(new RegExp(urlDev, "g"), urlProd);
+              }
+            },
+          },
         ],
       }),
       new HtmlWebpackPlugin({
