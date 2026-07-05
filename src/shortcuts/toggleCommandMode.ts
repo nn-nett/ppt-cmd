@@ -1,5 +1,7 @@
 /* global document, Office */
 
+import { parseAndDispatch } from "../parser";
+
 let commandModeActive = false;
 
 function setCommandModeVisual(active: boolean): void {
@@ -79,6 +81,25 @@ export function registerToggleCommandMode(): void {
       input.addEventListener("keydown", (event: KeyboardEvent) => {
         if (event.key === "Escape") {
           deactivateCommandMode();
+        } else if (event.key === "Enter") {
+          const value = input.value;
+          parseAndDispatch(value)
+            .then((result) => {
+              // Feedback visual detalhado (glow/cartao de erro) e da Story 1.5 --
+              // aqui so limpamos o campo e deixamos um rastro minimo no console.
+              if (result.ok === true) {
+                // eslint-disable-next-line no-console
+                console.log("comando executado:", result.message, result.affectedIds);
+              } else if (result.ok === false) {
+                // eslint-disable-next-line no-console
+                console.log("erro no comando:", result.error, result.hint);
+              }
+              input.value = "";
+            })
+            .catch((error) => {
+              // eslint-disable-next-line no-console
+              console.error("erro inesperado no parser:", error);
+            });
         }
       });
     }
