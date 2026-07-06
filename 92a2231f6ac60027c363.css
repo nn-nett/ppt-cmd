@@ -1,0 +1,50 @@
+/* Terminal Nativo (DESIGN.md) -- chrome escuro, sem sobra do template padrao do Yeoman. */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #181818;
+    color: #E4E4E4;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Feedback de execucao (FR7, DESIGN.md components.success-state/error-state) */
+
+.command-result {
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border-left: 3px solid;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 12px;
+    background: #1B1B1B;
+}
+
+.command-result-hint {
+    margin-top: 3px;
+    font-size: 10.5px;
+    color: #7a7a7a;
+}
+
+/* Sucesso: pulso unico ~1.6s, sobe e decai -- nunca repete (nao "infinite", diferente do mock de exploracao da UX) */
+.command-result--success {
+    border-left-color: #3DDC97;
+    color: #3DDC97;
+    animation: success-glow 1.6s ease-out 1;
+}
+
+/* Erro: estatico, sem animacao -- nao e um evento a celebrar */
+.command-result--error {
+    border-left-color: #F14C4C;
+    color: #F14C4C;
+}
+
+@keyframes success-glow {
+    0%   { box-shadow: 0 0 0 0 rgba(61,220,151,0); background: #1B1B1B; }
+    8%   { box-shadow: 0 0 16px 1px rgba(61,220,151,.30); background: #182420; }
+    28%  { box-shadow: 0 0 6px 0 rgba(61,220,151,.12); background: #191E1C; }
+    100% { box-shadow: 0 0 0 0 rgba(61,220,151,0); background: #1B1B1B; }
+}
