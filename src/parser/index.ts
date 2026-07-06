@@ -30,5 +30,9 @@ export async function parseAndDispatch(input: string): Promise<HandlerResult> {
     };
   }
 
-  return handler();
+  const result = await handler();
+  if (result.ok === true) {
+    return { ...result, command: entry.palavraCompleta };
+  }
+  return result;
 }

@@ -2,6 +2,7 @@
 
 import { parseAndDispatch } from "../parser";
 import { findGhostSuggestion } from "../commands/registry";
+import { showSuccess, showError, hideResult } from "../taskpane/commandResult";
 
 let commandModeActive = false;
 
@@ -39,6 +40,7 @@ function setCommandModeVisual(active: boolean): void {
 export function activateCommandMode(): void {
   commandModeActive = true;
   setCommandModeVisual(true);
+  hideResult();
 }
 
 export function deactivateCommandMode(): void {
@@ -127,17 +129,18 @@ export function registerToggleCommandMode(): void {
             const value = input.value;
             parseAndDispatch(value)
               .then((result) => {
-                // Feedback visual detalhado (glow/cartao de erro) e da Story 1.5 --
-                // aqui so limpamos o campo e deixamos um rastro minimo no console.
                 if (result.ok === true) {
-                  // eslint-disable-next-line no-console
-                  console.log("comando executado:", result.message, result.affectedIds);
+                  showSuccess(result.command ?? value, result.message);
                 } else if (result.ok === false) {
-                  // eslint-disable-next-line no-console
-                  console.log("erro no comando:", result.error, result.hint);
+                  showError(result.error, result.hint);
                 }
                 input.value = "";
                 updateGhostText();
+                // Volta ao repouso (Modo Comando adormece) depois do feedback --
+                // mesmo timing do auto-hide do cartao de resultado (commandResult.ts).
+                setTimeout(() => {
+                  deactivateCommandMode();
+                }, 2200);
               })
               .catch((error) => {
                 // eslint-disable-next-line no-console

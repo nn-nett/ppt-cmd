@@ -1,5 +1,5 @@
 export type HandlerResult =
-  | { ok: true; message: string; affectedIds: string[] }
+  | { ok: true; message: string; affectedIds: string[]; command?: string }
   | { ok: false; error: string; hint: string };
 
 export interface CommandRegistryEntry {
