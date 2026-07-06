@@ -1,10 +1,30 @@
 import { resolveCommand } from "../commands/registry";
 import { executeText } from "../commands/handlers/executeText";
+import { executeBold, executeItalic, executeUnderline } from "../commands/handlers/textFormatting";
+import {
+  executeAlignLeft,
+  executeAlignCenter,
+  executeAlignRight,
+  executeJustify,
+} from "../commands/handlers/paragraphAlignment";
+import { executeNewSlide } from "../commands/handlers/executeNewSlide";
+import { executeShape } from "../commands/handlers/executeShape";
+import { executeBullets } from "../commands/handlers/executeBullets";
 import { HandlerResult, CommandHandler } from "../commands/types";
 
-// Mapa handlerId -> funcao handler. Cresce conforme o Registro cresce (Story 1.6+).
+// Mapa handlerId -> funcao handler. Cresce conforme o Registro cresce (Story 1.6).
 const handlers: Record<string, CommandHandler> = {
   executeText,
+  executeBold,
+  executeItalic,
+  executeUnderline,
+  executeAlignLeft,
+  executeAlignCenter,
+  executeAlignRight,
+  executeJustify,
+  executeNewSlide,
+  executeShape,
+  executeBullets,
 };
 
 // Pipeline unico do parser (Arquitetura AD-6): resolve alias/palavra completa
