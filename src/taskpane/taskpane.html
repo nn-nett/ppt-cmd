@@ -18,7 +18,10 @@
         <div id="mode-chip" style="display:none; font-size:10px; letter-spacing:.5px; color:#C9F5E4; background:#1E332B; border:1px solid #2E4A3E; border-radius:3px; padding:2px 8px; margin-bottom:8px;">MODO COMANDO</div>
         <div id="command-bar-rest" role="button" style="display:flex; align-items:center; gap:8px; background:#232323; border:1px solid #333333; border-radius:4px; padding:8px 12px; cursor:text;">
             <span id="command-bar-prompt" style="color:#6A6A6A; font-family: 'Cascadia Code', Consolas, monospace; font-weight:700;">:</span>
-            <input id="command-bar-input" type="text" placeholder="Enter" style="flex:1; background:transparent; border:none; outline:none; color:#E4E4E4; font-family:'Cascadia Code', Consolas, monospace; font-size:15px;" />
+            <div style="position:relative; flex:1;">
+                <div id="command-bar-ghost" style="position:absolute; left:0; top:0; right:0; white-space:pre; pointer-events:none; font-family:'Cascadia Code', Consolas, monospace; font-size:15px; line-height:normal;"><span id="ghost-typed" style="color:transparent;"></span><span id="ghost-suffix" style="color:#6A6A6A;"></span></div>
+                <input id="command-bar-input" type="text" placeholder="Enter" style="position:relative; width:100%; background:transparent; border:none; outline:none; color:#E4E4E4; font-family:'Cascadia Code', Consolas, monospace; font-size:15px; padding:0; margin:0;" />
+            </div>
         </div>
     </section>
 </body>

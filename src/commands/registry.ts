@@ -19,3 +19,14 @@ export function resolveCommand(input: string): CommandRegistryEntry | undefined 
     (entry) => entry.alias.toLowerCase() === normalized || entry.palavraCompleta.toLowerCase() === normalized
   );
 }
+
+// Sugestao de autocomplete por substring (FR6, fuzzy/mid-string match -- nao so prefixo).
+// Usada pro ghost-text: retorna a primeira entrada cuja palavraCompleta contem a
+// substring digitada. Nao confundir com resolveCommand (match exato, usado no Enter).
+export function findGhostSuggestion(input: string): CommandRegistryEntry | undefined {
+  const normalized = input.trim().toLowerCase();
+  if (!normalized) {
+    return undefined;
+  }
+  return commandRegistry.find((entry) => entry.palavraCompleta.toLowerCase().includes(normalized));
+}
